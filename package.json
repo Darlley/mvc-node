@@ -1,0 +1,26 @@
+{
+  "name": "mvc-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darlley/mvc-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Darlley/mvc-node/issues"
+  },
+  "homepage": "https://github.com/Darlley/mvc-node#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
