@@ -8,7 +8,7 @@ export type ProductProps = {
 }
 
 export class Product {
-  private constructor(readonly props: ProductProps) { }
+  private constructor(readonly props: ProductProps) {}
 
   public static create({ name, price }: Pick<ProductProps, 'name' | 'price'>) {
     const product = new Product({
@@ -19,6 +19,10 @@ export class Product {
     })
 
     return product
+  }
+
+  public static with ({ id, name, price, quantity }: ProductProps) {
+    return new Product({ id, name, price, quantity })
   }
 
   get id () {
@@ -37,16 +41,14 @@ export class Product {
     return this.props.quantity
   }
 
-  public increaseStock(amount: number) {
+  public buy(amount: number) {
     if (amount >= 0) {
       this.props.quantity += amount
     }
   }
 
   public sell(amount: number){
-    if(this.props.quantity < amount){
-      throw new Error('Sem estoque suficiente')
-    }
+    if(this.props.quantity < amount) throw new Error('Sem estoque suficiente')
 
     this.props.quantity -= amount
   }

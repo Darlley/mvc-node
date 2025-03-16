@@ -4,12 +4,12 @@ import { ProductProps } from "../../entities/product"
 
 export type SellOutputDto = {
   id: string, 
-  amount: number
+  quantity: number
 }
 
 export type BuyOutputDto = {
   id: string, 
-  amount: number
+  quantity: number
 }
 
 export type ListOutputDto = {
@@ -17,7 +17,7 @@ export type ListOutputDto = {
 }
 
 export interface ProductService {
-  sell(id: string, amount: number): Promise<SellOutputDto>
-  buy(id: string, amount: number): Promise<BuyOutputDto>
+  sell(id: string, quantity: number): Promise<SellOutputDto>
+  buy(id: string, quantity: number): Promise<BuyOutputDto>
   list(): Promise<ListOutputDto>
 }
