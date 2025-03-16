@@ -53,3 +53,66 @@ O ProductService também é uma interface que descreve quais métodos a aplicaç
 - implementation
 
 A nossa classe ProductServiceImplementation implementa os métodos da ProductService. Ela recebe o ProductRepository no construtor, e quando ela e a forma de se criar uma nova instancia dela é invocanto o método build com o ProductRepository.
+
+## PRISMA
+
+```
+$ npm install prisma -D
+$ npx prisma init
+$ npx prisma db push
+$ npx prisma studio
+$ npm install @prisma/client - D
+```
+
+com isto criamos o nosso ProductRepositoryPrisma. Agora se trocarmos o Prisma pelo TypeORM, Drizzle, ou qualquer outro ORM, o nosso ProductServiceImplementation jamais saberá por que estipulamos um contrato de que qualquer ORM deve se adaptar ao ProductRepository.
+
+## EXPRESS
+
+Nosso ProductController vai depender do Express.
+
+```
+$ npm install express
+$ npm install @types/express -D
+```
+
+
+// interface api.ts 
+```ts
+export interface Api {
+  start(port: number): Promise<void>
+}
+```
+
+// implementation api.express.ts
+```ts
+import express, { Express, Request, Response } from 'express'
+import { Api } from '../api'
+
+export class ApiExpress implements Api {
+  private app: Express
+
+  private constructor(app: Express) {
+    this.app = app
+  }
+
+  public static build(): Api {
+    const app = express()
+    app.use(express.json())
+    return new ApiExpress(app)
+  }
+
+  public addGetRoute(path: string, handle: (request: Request, response: Response) => Promise<void>): void {
+    this.app.get(path, handle)
+  }
+  
+  public addPostRoute(path: string, handle: (request: Request, response: Response) => Promise<void>): void {
+    this.app.post(path, handle) 
+  }
+
+  public async start(port: number): Promise<void> {
+    this.app.listen(port, () => {
+      console.log(`Server is running on port http://localhost:${port}`)
+    })
+  }
+}
+```
